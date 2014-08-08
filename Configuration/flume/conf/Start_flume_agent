@@ -1,0 +1,3 @@
+#type this command on terminal and flume agent will start.
+
+flume-ng agent -c /path_to_conf_dir/conf -f /path_to_conf_dir/conf/flume.conf -n agentName -Dflume.root.logger=INFO,console
