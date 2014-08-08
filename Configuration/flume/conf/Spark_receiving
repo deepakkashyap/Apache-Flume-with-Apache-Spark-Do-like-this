@@ -1,0 +1,43 @@
+import org.apache.spark.streaming.*;
+import org.apache.spark.streaming.api.java.*;
+import org.apache.spark.streaming.flume.FlumeUtils;
+import org.apache.spark.streaming.flume.SparkFlumeEvent;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+import java.io.IOException;
+public class spark 
+{
+	private spark()
+	{  
+		
+	}
+	 
+	 public static  JavaStreamingContext ssc;
+	 public static JavaDStream<SparkFlumeEvent> flumeStream ;
+	public static void main(String[] args) throws IOException 
+	{
+	       
+		 
+		  Logger.getLogger("org").setLevel(Level.ERROR);
+		    Logger.getLogger("akka").setLevel(Level.ERROR);//for log level on console
+          
+        
+		    Duration batchInterval = new Duration(500);
+			
+			ssc = new JavaStreamingContext("local", "FlumeEventCount", batchInterval,System.getenv("SPARK_HOME"),
+	            JavaStreamingContext.jarOfClass(spark.class));
+
+			   
+			 flumeStream = FlumeUtils.createStream(ssc,"localhost", 41414);//port where your avro sink is sending data
+	    
+	    flumeStream.print();//write your code
+	  
+	   
+	    
+	    
+
+	  
+	    ssc.start();
+	    ssc.awaitTermination();
+}
+}
