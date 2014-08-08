@@ -2,4 +2,4 @@ step.1 -> Eclipse with maven,jdk installed.
 
 step.2 -> Download Apache Spark and congigure it.
 
-step.3 -> Download Apache Flume Tar file.Extract it and get configuration and java file from repo.
+step.3 -> Download Apache Flume Tar file.Extract it and get configuration  from repo and Java files.
